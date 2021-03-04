@@ -3,6 +3,7 @@
 #include "RE/H/hkpCdBody.h"
 #include "RE/H/hkpShape.h"
 #include "RE/H/hkpTypedBroadPhaseHandle.h"
+#include "RE/N/NiAVObject.h"
 
 namespace RE
 {
@@ -37,11 +38,8 @@ namespace RE
 		};
 		static_assert(sizeof(BoundingVolumeData) == 0x38);
 
-		[[nodiscard]] void* GetOwner() const
-		{
-			return const_cast<void*>(stl::adjust_pointer<const void>(this, ownerOffset));
-		}
-
+		NiAVObject* Get3D() const;
+		void* GetOwner() const;
 		template <class T>
 		T* GetOwner() const
 		{
