@@ -55,7 +55,8 @@ namespace RE
 		virtual hkMotionState*           GetMotionState() = 0;                            // 05
 
 		const hkpCollidable* GetCollidable() const;
-		hkpCollidable*       GetCollidableRW();
+		hkpCollidable*		 GetCollidableRW();
+		std::uint64_t		 GetPropertyValue(std::uint32_t a_key) const;
 
 		// members
 		hkpWorld*            world;             // 10
