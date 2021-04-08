@@ -43,7 +43,7 @@ namespace RE
 		Variable::~Variable()
 		{
 			Cleanup();
-			memzero(this);
+			stl::memzero(this);
 		}
 
 		Variable& Variable::operator=(const Variable& a_rhs)
@@ -97,7 +97,7 @@ namespace RE
 			case Type::kBoolArray:
 				return value.arr.get() == a_rhs.value.arr.get();
 			default:
-				assert(false);	// unhandled type
+				assert(false);  // unhandled type
 				return false;
 			}
 		}
@@ -136,7 +136,7 @@ namespace RE
 			case Type::kBoolArray:
 				return value.arr.get() < a_rhs.value.arr.get();
 			default:
-				assert(false);	// unhandled type
+				assert(false);  // unhandled type
 				return false;
 			}
 		}
@@ -335,7 +335,7 @@ namespace RE
 				value.arr.~BSTSmartPointer();
 				break;
 			default:
-				assert(false);	// unhandled type
+				assert(false);  // unhandled type
 				break;
 			}
 		}
@@ -366,7 +366,7 @@ namespace RE
 				value.arr = a_rhs.value.arr;
 				break;
 			default:
-				assert(false);	// unhandled type
+				assert(false);  // unhandled type
 				break;
 			}
 		}

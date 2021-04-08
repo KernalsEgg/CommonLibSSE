@@ -12,9 +12,9 @@ namespace RE
 		virtual ~TESValueForm();  // 00
 
 		// override (BaseFormComponent)
-		virtual void InitializeDataComponent() override;				// 01
-		virtual void ClearDataComponent() override;						// 02 - { return; }
-		virtual void CopyComponent(BaseFormComponent* a_rhs) override;	// 03
+		virtual void InitializeDataComponent() override;                // 01
+		virtual void ClearDataComponent() override;                     // 02 - { return; }
+		virtual void CopyComponent(BaseFormComponent* a_rhs) override;  // 03
 
 		// members
 		std::int32_t  value;  // 08

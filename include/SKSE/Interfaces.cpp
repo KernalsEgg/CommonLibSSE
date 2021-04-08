@@ -14,7 +14,7 @@ namespace SKSE
 
 	bool QueryInterface::IsEditor() const
 	{
-		return GetProxy()->isEditor;
+		return static_cast<bool>(GetProxy()->isEditor);
 	}
 
 	REL::Version QueryInterface::RuntimeVersion() const
@@ -302,17 +302,17 @@ namespace SKSE
 
 	SKSEDelayFunctorManager& ObjectInterface::GetDelayFunctorManager() const
 	{
-		return GetProxy()->GetDelayFunctorManager();
+		return (SKSEDelayFunctorManager&)GetProxy()->GetDelayFunctorManager();
 	}
 
 	SKSEObjectRegistry& ObjectInterface::GetObjectRegistry() const
 	{
-		return GetProxy()->GetObjectRegistry();
+		return (SKSEObjectRegistry&)GetProxy()->GetObjectRegistry();
 	}
 
 	SKSEPersistentObjectStorage& ObjectInterface::GetPersistentObjectStorage() const
 	{
-		return GetProxy()->GetPersistentObjectStorage();
+		return (SKSEPersistentObjectStorage&)GetProxy()->GetPersistentObjectStorage();
 	}
 
 	const detail::SKSEObjectInterface* ObjectInterface::GetProxy() const

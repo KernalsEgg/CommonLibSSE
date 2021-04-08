@@ -18,9 +18,9 @@ namespace RE
 		{
 		public:
 			// members
-			BGSKeyword*	  keyword;		// 00
-			FormID		  linkedRefID;	// 08
-			std::uint32_t pad0C;		// 0C
+			BGSKeyword*   keyword;      // 00
+			FormID        linkedRefID;  // 08
+			std::uint32_t pad0C;        // 0C
 		};
 		static_assert(sizeof(Entry) == 0x10);
 
@@ -46,7 +46,7 @@ namespace RE
 			size_type size() const noexcept;
 
 			// members
-			Data		  _data;   // 00
+			Data          _data;   // 00
 			std::uint32_t _size;   // 10
 			std::uint32_t _pad14;  // 14
 		};
@@ -55,12 +55,12 @@ namespace RE
 		virtual ~ExtraMissingLinkedRefIDs();  // 00
 
 		// override (BSExtraData)
-		virtual ExtraDataType GetType() const override;	 // 01 - { return kMissingLinkedRefIDs; }
+		virtual ExtraDataType GetType() const override;  // 01 - { return kMissingLinkedRefIDs; }
 
 		TESObjectREFR* GetLinkedRef(BGSKeyword* a_keyword);
 
 		// members
-		Array entries;	// 10
+		Array entries;  // 10
 	};
 	static_assert(sizeof(ExtraMissingLinkedRefIDs) == 0x28);
 }

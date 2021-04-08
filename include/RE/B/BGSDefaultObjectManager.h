@@ -395,18 +395,18 @@ namespace RE
 	{
 	public:
 		// members
-		const char*											 name;		   // 00
-		stl::enumeration<FormType, std::uint8_t>			 type;		   // 08
-		std::uint8_t										 pad09;		   // 09
-		std::uint16_t										 pad0A;		   // 0A
-		char												 uniqueID[4];  // 0C
-		stl::enumeration<DEFAULT_OBJECT_TYPE, std::uint32_t> doType;	   // 10
-		std::uint32_t										 pad14;		   // 14
+		const char*                                          name;         // 00
+		stl::enumeration<FormType, std::uint8_t>             type;         // 08
+		std::uint8_t                                         pad09;        // 09
+		std::uint16_t                                        pad0A;        // 0A
+		char                                                 uniqueID[4];  // 0C
+		stl::enumeration<DEFAULT_OBJECT_TYPE, std::uint32_t> doType;       // 10
+		std::uint32_t                                        pad14;        // 14
 	};
 	static_assert(sizeof(DEFAULT_OBJECT_DATA) == 0x18);
 
 	class BGSDefaultObjectManager :
-		public TESForm,										  // 000
+		public TESForm,                                       // 000
 		public BSTSingletonImplicit<BGSDefaultObjectManager>  // 020
 	{
 	public:
@@ -422,11 +422,11 @@ namespace RE
 			};
 		};
 
-		virtual ~BGSDefaultObjectManager();	 // 00
+		virtual ~BGSDefaultObjectManager();  // 00
 
 		// override (TESForm)
-		virtual bool Load(TESFile* a_mod) override;	 // 06
-		virtual void InitItemImpl() override;		 // 13
+		virtual bool Load(TESFile* a_mod) override;  // 06
+		virtual void InitItemImpl() override;        // 13
 
 		[[nodiscard]] static BGSDefaultObjectManager* GetSingleton()
 		{
@@ -435,17 +435,17 @@ namespace RE
 			return func();
 		}
 
-		[[nodiscard]] TESForm* GetObject(DefaultObject a_object) const noexcept { return GetObject(to_underlying(a_object)); }
+		[[nodiscard]] TESForm* GetObject(DefaultObject a_object) const noexcept { return GetObject(stl::to_underlying(a_object)); }
 
 		template <class T>
 		[[nodiscard]] T* GetObject(DefaultObject a_object) const noexcept
 		{
-			return GetObject<T>(to_underlying(a_object));
+			return GetObject<T>(stl::to_underlying(a_object));
 		}
 
 		[[nodiscard]] TESForm* GetObject(std::size_t a_idx) const noexcept
 		{
-			assert(a_idx < to_underlying(DefaultObject::kTotal));
+			assert(a_idx < stl::to_underlying(DefaultObject::kTotal));
 			return objectInit[a_idx] ? objects[a_idx] : nullptr;
 		}
 
@@ -457,9 +457,9 @@ namespace RE
 		}
 
 		// members
-		TESForm*	  objects[DEFAULT_OBJECTS::kTotal];		// 020 - DNAM
-		bool		  objectInit[DEFAULT_OBJECTS::kTotal];	// B80
-		std::uint32_t padCEC;								// CEC
+		TESForm*      objects[DEFAULT_OBJECTS::kTotal];     // 020 - DNAM
+		bool          objectInit[DEFAULT_OBJECTS::kTotal];  // B80
+		std::uint32_t padCEC;                               // CEC
 	};
 	static_assert(sizeof(BGSDefaultObjectManager) == 0xCF0);
 }

@@ -12,7 +12,7 @@ namespace RE
 		inline static constexpr auto RTTI = RTTI_bhkCollisionObject;
 		inline static constexpr auto Ni_RTTI = NiRTTI_bhkCollisionObject;
 
-		virtual ~bhkCollisionObject();	// 00
+		virtual ~bhkCollisionObject();  // 00
 
 		// override (bhkNiCollisionObject)
 		virtual const NiRTTI* GetRTTI() const override;							  // 02

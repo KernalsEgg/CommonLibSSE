@@ -11,7 +11,7 @@ namespace RE
 	class BGSMaterialType;
 
 	class BGSImpactDataSet :
-		public TESForm,		   // 00
+		public TESForm,        // 00
 		public BGSPreloadable  // 20
 	{
 	public:
@@ -30,9 +30,11 @@ namespace RE
 		virtual ~BGSImpactDataSet();  // 00
 
 		// override (TESForm)
-		virtual void ClearData() override;			 // 05
-		virtual bool Load(TESFile* a_mod) override;	 // 06
-		virtual void InitItemImpl() override;		 // 13
+		virtual void ClearData() override;           // 05
+		virtual bool Load(TESFile* a_mod) override;  // 06
+		virtual void InitItemImpl() override;        // 13
+
+		BGSImpactData* GetImpactData(BGSMaterialType* a_materialType) const;
 
 		BGSImpactData* GetImpactData(BGSMaterialType* a_materialType) const;
 

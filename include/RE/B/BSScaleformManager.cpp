@@ -45,7 +45,8 @@ namespace RE
 			return false;
 		}
 
-		const auto def = loader->CreateMovie(filePath->c_str(), LoadConstants::kLoadKeepBindData | LoadConstants::kLoadWaitFrame1);
+		const stl::enumeration loadFlags{ LoadConstants::kLoadKeepBindData, LoadConstants::kLoadWaitFrame1 };
+		const auto             def = loader->CreateMovie(filePath->c_str(), *loadFlags);
 		if (!def) {
 			return false;
 		}
@@ -66,7 +67,7 @@ namespace RE
 		const auto [safeZoneX, safeZoneY, width, height] = CollectDisplayInfo();
 
 		const auto visibleRect = view->GetVisibleFrameRect();
-		GRectF	   safeRect;
+		GRectF     safeRect;
 		safeRect.left = safeZoneX;
 		safeRect.top = safeZoneY;
 		safeRect.right = (visibleRect.right - visibleRect.left) - safeZoneX;
@@ -104,7 +105,8 @@ namespace RE
 			return false;
 		}
 
-		const auto def = loader->CreateMovie(filePath->c_str(), LoadConstants::kLoadKeepBindData | LoadConstants::kLoadWaitFrame1);
+		const stl::enumeration loadFlags{ LoadConstants::kLoadKeepBindData, LoadConstants::kLoadWaitFrame1 };
+		const auto             def = loader->CreateMovie(filePath->c_str(), *loadFlags);
 		if (!def) {
 			return false;
 		}
@@ -122,7 +124,7 @@ namespace RE
 		const auto [safeZoneX, safeZoneY, width, height] = CollectDisplayInfo();
 
 		const auto visibleRect = a_viewOut->GetVisibleFrameRect();
-		GRectF	   safeRect;
+		GRectF     safeRect;
 		safeRect.left = safeZoneX;
 		safeRect.top = safeZoneY;
 		safeRect.right = (visibleRect.right - visibleRect.left) - safeZoneX;

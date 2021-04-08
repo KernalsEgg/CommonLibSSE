@@ -14,10 +14,10 @@ namespace RE
 		virtual ~ExtraObjectHealth();  // 00
 
 		// override (BSExtraData)
-		virtual ExtraDataType GetType() const override;	 // 01 - { return kObjectHealth; }
+		virtual ExtraDataType GetType() const override;  // 01 - { return kObjectHealth; }
 
 		// members
-		float		  health;  // 10
+		float         health;  // 10
 		std::uint32_t pad14;   // 14
 	};
 	static_assert(sizeof(ExtraObjectHealth) == 0x18);

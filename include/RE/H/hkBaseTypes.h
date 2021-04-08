@@ -36,7 +36,7 @@ namespace RE
 	{
 	public:
 		// members
-		std::uint8_t value;	 // 0
+		std::uint8_t value;  // 0
 	};
 	static_assert(sizeof(hkUFloat8) == 0x1);
 }

@@ -25,7 +25,7 @@ namespace RE
 		static float GetWorldScaleInverse();
 
 		// members
-		std::uint8_t unk0020[0xC600 - 0x0020];	// 0020
+		std::uint8_t unk0020[0xC600 - 0x0020];  // 0020
 	};
 	static_assert(sizeof(bhkWorld) == 0xC600);
 }

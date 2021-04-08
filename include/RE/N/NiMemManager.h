@@ -16,7 +16,7 @@ namespace RE
 		bool  TrackDeallocate(const void* const a_mem, NiMemEventType a_eventType);
 
 		// members
-		NiAllocator* allocator;	 // 00
+		NiAllocator* allocator;  // 00
 	};
 	static_assert(sizeof(NiMemManager) == 0x8);
 }

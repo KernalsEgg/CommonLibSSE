@@ -5,6 +5,7 @@
 #include "RE/B/BGSColorForm.h"
 #include "RE/B/BGSDefaultObjectManager.h"
 #include "RE/B/BSFaceGenAnimationData.h"
+#include "RE/B/BSFaceGenNiNode.h"
 #include "RE/E/ExtraCanTalkToPlayer.h"
 #include "RE/E/ExtraFactionChanges.h"
 #include "RE/F/FormTraits.h"
@@ -84,7 +85,7 @@ namespace RE
 		if (xTalk) {
 			return xTalk->talk;
 		} else {
-			return race ? race->AllowsPCDialogue() : false;
+			return race != nullptr && race->AllowsPCDialogue();
 		}
 	}
 
@@ -238,6 +239,14 @@ namespace RE
 		return ActorHandle(this);
 	}
 
+	NiAVObject* Actor::GetHeadPartObject(BGSHeadPart::HeadPartType a_type)
+	{
+		const auto actorBase = GetActorBase();
+		const auto faceNode = GetFaceNodeSkinned();
+		const auto facePart = actorBase ? actorBase->GetCurrentHeadPartByType(a_type) : nullptr;
+		return faceNode && facePart ? faceNode->GetObjectByName(facePart->formEditorID) : nullptr;
+	}
+
 	float Actor::GetHeight()
 	{
 		const auto min = GetBoundMin();
@@ -278,6 +287,54 @@ namespace RE
 	{
 		auto base = GetActorBase();
 		return base ? base->race : nullptr;
+	}
+
+	TESObjectARMO* Actor::GetSkin(BGSBipedObjectForm::BipedObjectSlot a_slot)
+	{
+		if (const auto worn = GetWornArmor(a_slot); worn) {
+			return worn;
+		} else if (const auto base = GetActorBase(); base && base->skin) {
+			return base->skin;
+		} else if (const auto aRace = GetRace(); aRace && aRace->skin) {
+			return aRace->skin;
+		}
+
+		return nullptr;
+	}
+
+	TESObjectARMO* Actor::GetWornArmor(BGSBipedObjectForm::BipedObjectSlot a_slot)
+	{
+		const auto inv = GetInventory([](TESBoundObject& a_object) {
+			return a_object.IsArmor();
+		});
+
+		for (const auto& [item, invData] : inv) {
+			const auto& [count, entry] = invData;
+			if (count > 0 && entry->IsWorn()) {
+				const auto armor = item->As<TESObjectARMO>();
+				if (armor && armor->HasPartOf(a_slot)) {
+					return armor;
+				}
+			}
+		}
+
+		return nullptr;
+	}
+
+	TESObjectARMO* Actor::GetWornArmor(FormID a_formID)
+	{
+		const auto inv = GetInventory([=](TESBoundObject& a_object) {
+			return a_object.IsArmor() && a_object.GetFormID() == a_formID;
+		});
+
+		for (const auto& [item, invData] : inv) {
+			const auto& [count, entry] = invData;
+			if (count > 0 && entry->IsWorn()) {
+				return item->As<TESObjectARMO>();
+			}
+		}
+
+		return nullptr;
 	}
 
 	bool Actor::HasPerk(BGSPerk* a_perk) const
@@ -456,9 +513,9 @@ namespace RE
 			const auto hairColor = npc->headRelatedData->hairColor;
 			if (hairColor) {
 				NiColor color;
-				color.red = hairColor->color.red / static_cast<float>(128.0);
-				color.green = hairColor->color.green / static_cast<float>(128.0);
-				color.blue = hairColor->color.blue / static_cast<float>(128.0);
+				color.red = static_cast<float>(hairColor->color.red) / static_cast<float>(128.0);
+				color.green = static_cast<float>(hairColor->color.green) / static_cast<float>(128.0);
+				color.blue = static_cast<float>(hairColor->color.blue) / static_cast<float>(128.0);
 
 				auto model = Get3D(false);
 				if (model) {
@@ -473,9 +530,9 @@ namespace RE
 		const auto* npc = GetActorBase();
 		if (npc) {
 			NiColor color;
-			color.red = npc->bodyTintColor.red / static_cast<float>(255.0);
-			color.green = npc->bodyTintColor.green / static_cast<float>(255.0);
-			color.blue = npc->bodyTintColor.blue / static_cast<float>(255.0);
+			color.red = static_cast<float>(npc->bodyTintColor.red) / static_cast<float>(255.0);
+			color.green = static_cast<float>(npc->bodyTintColor.green) / static_cast<float>(255.0);
+			color.blue = static_cast<float>(npc->bodyTintColor.blue) / static_cast<float>(255.0);
 
 			auto thirdPerson = Get3D(false);
 			if (thirdPerson) {
@@ -521,7 +578,7 @@ namespace RE
 
 	bool Actor::WouldBeStealing(const TESObjectREFR* a_target) const
 	{
-		return a_target ? !a_target->IsAnOwner(this, true, false) : false;
+		return a_target != nullptr && !a_target->IsAnOwner(this, true, false);
 	}
 
 	TESFaction* Actor::GetCrimeFactionImpl() const

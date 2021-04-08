@@ -16,8 +16,8 @@ namespace RE
 		virtual void Accept(CallbackProcessor* a_cbReg) override;  // 01
 
 		// members
-		GFxValue	  unk18;  // 18
-		bool		  unk30;  // 30
+		GFxValue      unk18;  // 18
+		bool          unk30;  // 30
 		std::uint8_t  unk31;  // 31
 		std::uint16_t unk32;  // 32
 		std::uint32_t unk34;  // 34

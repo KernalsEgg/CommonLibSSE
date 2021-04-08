@@ -42,7 +42,6 @@ set(sources ${sources}
 	include/RE/B/BSAudioManager.cpp
 	include/RE/B/BSEffectShaderData.cpp
 	include/RE/B/BSExtraData.cpp
-	include/RE/B/BSFaceGenAnimationData.cpp
 	include/RE/B/BSFixedString.cpp
 	include/RE/B/BSHandleRefObject.cpp
 	include/RE/B/BSInputDevice.cpp
@@ -126,7 +125,6 @@ set(sources ${sources}
 	include/RE/H/hkpBroadPhase.cpp
 	include/RE/H/hkpCdBody.cpp
 	include/RE/H/hkpCharacterProxyListener.cpp
-	include/RE/H/hkpCollidable.cpp
 	include/RE/H/hkpMaterial.cpp
 	include/RE/H/hkpWorldObject.cpp
 	include/RE/H/hkReferencedObject.cpp

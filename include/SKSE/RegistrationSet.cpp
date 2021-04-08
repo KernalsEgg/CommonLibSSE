@@ -159,7 +159,7 @@ namespace SKSE
 		bool RegistrationSetBase::Save(SerializationInterface* a_intfc)
 		{
 			assert(a_intfc);
-			Locker			  locker(_lock);
+			Locker            locker(_lock);
 			const std::size_t numRegs = _handles.size();
 			if (!a_intfc->WriteRecordData(numRegs)) {
 				log::error("Failed to save number of regs ({})", numRegs);

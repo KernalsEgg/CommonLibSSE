@@ -21,7 +21,7 @@ namespace RE
 		};
 
 		// members
-		Buffer		  buffer;
+		Buffer        buffer;
 		std::uint32_t size;
 	};
 	static_assert(sizeof(BSBitField<>) == 0x18);

@@ -17,8 +17,8 @@ namespace RE
 			next->prev = prev;
 		}
 
-		GListNode<T>* prev;	 // 00
-		GListNode<T>* next;	 // 08
+		GListNode<T>* prev;  // 00
+		GListNode<T>* next;  // 08
 	};
 	static_assert(sizeof(GListNode<void*>) == 0x10);
 

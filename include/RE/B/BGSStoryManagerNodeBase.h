@@ -34,21 +34,21 @@ namespace RE
 		};
 		static_assert(sizeof(Flags) == 0x4);
 
-		virtual ~BGSStoryManagerNodeBase();	 // 00
+		virtual ~BGSStoryManagerNodeBase();  // 00
 
 		// override (BGSStoryManagerTreeForm)
-		virtual void		  InitializeData() override;	  // 04
-		virtual void		  ClearData() override;			  // 05
-		virtual bool		  Load(TESFile* a_mod) override;  // 06
-		virtual void		  InitItemImpl() override;		  // 13
-		virtual TESCondition* QConditions() override;		  // 3D - { return &conditions; }
+		virtual void          InitializeData() override;      // 04
+		virtual void          ClearData() override;           // 05
+		virtual bool          Load(TESFile* a_mod) override;  // 06
+		virtual void          InitItemImpl() override;        // 13
+		virtual TESCondition* QConditions() override;         // 3D - { return &conditions; }
 
 		// members
-		BGSStoryManagerBranchNode* parent;			 // 28 - PNAM
-		BGSStoryManagerNodeBase*   previousSibling;	 // 30 - SNAM
-		std::uint32_t			   maxQuests;		 // 38 - XNAM
-		Flags					   flags;			 // 3C - DNAM
-		TESCondition			   conditions;		 // 40 - CITC
+		BGSStoryManagerBranchNode* parent;           // 28 - PNAM
+		BGSStoryManagerNodeBase*   previousSibling;  // 30 - SNAM
+		std::uint32_t              maxQuests;        // 38 - XNAM
+		Flags                      flags;            // 3C - DNAM
+		TESCondition               conditions;       // 40 - CITC
 	};
 	static_assert(sizeof(BGSStoryManagerNodeBase) == 0x48);
 }

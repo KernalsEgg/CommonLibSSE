@@ -6,11 +6,11 @@ namespace RE
 	{
 		struct Factories
 		{
-			IFormFactory* data[to_underlying(FormType::Max)];
+			IFormFactory* data[stl::to_underlying(FormType::Max)];
 		};
 
 		REL::Relocation<Factories*> formFactories{ REL::ID(514355) };
-		REL::Relocation<bool*>		formFactoriesInitialized{ REL::ID(514349) };
+		REL::Relocation<bool*>      formFactoriesInitialized{ REL::ID(514349) };
 		return std::make_pair(formFactories->data, *formFactoriesInitialized);
 	}
 

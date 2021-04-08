@@ -15,8 +15,8 @@ namespace RE
 			{
 			public:
 				// members
-				T max;	// 0
-				T min;	// ?
+				T max;  // 0
+				T min;  // ?
 			};
 			static_assert(sizeof(MaxMin<Color>) == 0x8);
 
@@ -29,8 +29,8 @@ namespace RE
 
 		// members
 		Directional directional;   // 00
-		Color		specular;	   // 18
-		float		fresnelPower;  // 1C
+		Color       specular;      // 18
+		float       fresnelPower;  // 1C
 	};
 	static_assert(sizeof(BGSDirectionalAmbientLightingColors) == 0x20);
 }
