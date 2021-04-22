@@ -28,6 +28,12 @@ namespace RE
 
 		TES_HEAP_REDEFINE_NEW();
 
+		std::uint32_t GetDuration() const;
+		float		  GetMagnitude() const;
+		void		  SetCost();
+		bool		  SetDuration(std::uint32_t a_duration);
+		bool		  SetMagnitude(float a_magnitude);
+
 		// members
 		EffectItem     effectItem;  // 00 - EFIT
 		std::uint32_t  pad0C;       // 0C

@@ -1,18 +1,83 @@
 #pragma once
 
+#include "RE/B/BSIntrusiveRefCounted.h"
 #include "RE/B/BSString.h"
+#include "RE/B/BSTArray.h"
 #include "RE/C/CraftingSubMenu.h"
+#include "RE/E/Effect.h"
+#include "RE/F/FormTypes.h"
 #include "RE/G/GFxValue.h"
 #include "RE/I/IMessageBoxCallback.h"
+#include "RE/M/MagicItemTraversalFunctor.h"
 
 namespace RE
 {
+	class EnchantmentItem;
+	class TESBoundObject;
+
 	namespace CraftingSubMenus
 	{
 		class EnchantConstructMenu : public CraftingSubMenu
 		{
 		public:
 			inline static constexpr auto RTTI = RTTI_CraftingSubMenus__EnchantConstructMenu;
+
+			class CategoryListEntry : public BSIntrusiveRefCounted
+			{
+			public:
+				enum FilterFlag : std::uint32_t
+				{
+					kEffectWeapon = 1 << 4,
+					kEffectArmor = 1 << 5
+				};
+
+				virtual ~CategoryListEntry();  // 00
+
+				// add
+				virtual void Unk_01(void) = 0;	// 01
+				virtual void Unk_02(void) = 0;	// 02
+				virtual void Unk_03(void) = 0;	// 03
+				virtual void Unk_04(void) = 0;	// 04
+
+				// members
+				stl::enumeration<FilterFlag, std::uint32_t> filterFlag;	 // 0C
+				bool										equipped;	 // 10
+				bool										enabled;	 // 11
+				std::uint16_t								pad12;		 // 12
+				std::uint32_t								pad14;		 // 14
+			};
+			static_assert(sizeof(CategoryListEntry) == 0x18);
+
+			class EnchantmentEntry : public CategoryListEntry
+			{
+			public:
+				// members
+				EnchantmentItem* enchantment;
+				float			 power;
+				float			 maximumPower;
+			};
+			static_assert(sizeof(EnchantmentEntry) == 0x28);
+
+			class CreateEffectFunctor : public MagicItemTraversalFunctor
+			{
+			public:
+				virtual ~CreateEffectFunctor();	 // 00
+
+				// override
+				virtual std::uint32_t TraverseEffect(Effect* a_source) override;  // 01
+
+				// members
+				BSTArray<Effect>  effects;			 // 10
+				Effect*			  costliestEffect;	 // 28
+				EnchantmentEntry* enchantmentEntry;	 // 30
+				EnchantmentItem*  enchantment;		 // 38
+				FormType		  formType;			 // 40
+				std::uint32_t	  pad44;			 // 44
+				TESBoundObject*	  item;				 // 48
+				float			  powerMultiplier;	 // 50
+				std::uint32_t	  pad54;			 // 54
+			};
+			static_assert(sizeof(CreateEffectFunctor) == 0x58);
 
 			class EnchantMenuCallback : public IMessageBoxCallback
 			{
@@ -71,38 +136,26 @@ namespace RE
 			virtual void Unk_07(void) override;                        // 07
 
 			// members
-			std::uint64_t unk100;  // 100
-			std::uint64_t unk108;  // 108
-			std::uint64_t unk110;  // 110
-			std::uint64_t unk118;  // 118
-			std::uint64_t unk120;  // 120
-			std::uint64_t unk128;  // 128
-			BSString      unk130;  // 130
-			GFxValue      unk140;  // 140
-			GFxValue      unk158;  // 158
-			std::uint64_t unk170;  // 170
-			std::uint64_t unk178;  // 178
-			std::uint64_t unk180;  // 180
-			std::uint64_t unk188;  // 188
-			std::uint64_t unk190;  // 190
-			std::uint64_t unk198;  // 198
-			std::uint64_t unk1A0;  // 1A0
-			std::uint64_t unk1A8;  // 1A8
-			std::uint64_t unk1B0;  // 1B0
-			std::uint64_t unk1B8;  // 1B8
-			std::uint64_t unk1C0;  // 1C0
-			std::uint64_t unk1C8;  // 1C8
-			std::uint64_t unk1D0;  // 1D0
-			std::uint64_t unk1D8;  // 1D8
-			std::uint64_t unk1E0;  // 1E0
-			std::uint64_t unk1E8;  // 1E8
-			std::uint64_t unk1F0;  // 1F0
-			std::uint64_t unk1F8;  // 1F8
-			std::uint64_t unk200;  // 200
-			std::uint32_t unk208;  // 208
-			std::uint32_t unk20C;  // 20C
-			std::uint64_t unk210;  // 210
-			std::uint64_t unk218;  // 218
+			std::uint64_t			   unk100;				 // 100
+			std::uint64_t			   unk108;				 // 108
+			std::uint64_t			   unk110;				 // 110
+			std::uint64_t			   unk118;				 // 118
+			std::uint64_t			   unk120;				 // 120
+			std::uint64_t			   unk128;				 // 128
+			BSString				   unk130;				 // 130
+			GFxValue				   unk140;				 // 140
+			GFxValue				   unk158;				 // 158
+			std::uint64_t			   unk170;				 // 170
+			std::uint64_t			   unk178;				 // 178
+			BSTArray<EnchantmentEntry> enchantments;		 // 180
+			std::uint64_t			   unk198;				 // 198
+			std::uint64_t			   unk1A0;				 // 1A0
+			CreateEffectFunctor		   createEffectFunctor;	 // 1A8
+			std::uint64_t			   unk200;				 // 200
+			std::uint32_t			   unk208;				 // 208
+			std::uint32_t			   unk20C;				 // 20C
+			std::uint64_t			   unk210;				 // 210
+			std::uint64_t			   unk218;				 // 218
 		};
 		static_assert(sizeof(EnchantConstructMenu) == 0x220);
 	}
