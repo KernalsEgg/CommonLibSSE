@@ -866,6 +866,7 @@ set(headers ${headers}
 	include/RE/M/MagicCaster.h
 	include/RE/M/MagicFavorites.h
 	include/RE/M/MagicItem.h
+	include/RE/M/MagicItemTraversalFunctor.h
 	include/RE/M/MagicMenu.h
 	include/RE/M/MagicSystem.h
 	include/RE/M/MagicTarget.h
@@ -986,6 +987,7 @@ set(headers ${headers}
 	include/RE/P/PCGamepadType.h
 	include/RE/P/PerkEntryVisitor.h
 	include/RE/P/PerkRankVisitor.h
+	include/RE/P/PersistentFormManager.h
 	include/RE/P/PlayerCamera.h
 	include/RE/P/PlayerCharacter.h
 	include/RE/P/PlayerControls.h

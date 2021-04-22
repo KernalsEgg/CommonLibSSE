@@ -66,11 +66,11 @@ namespace RE
 		return func(a_editorID);
 	}
 
-	void ApplyPerkEntries(std::uint8_t a_perkEntryCode, RE::Actor* a_perkOwner, RE::TESForm* a_form, float* a_value)
+	void ApplyPerkEntries(BGSEntryPoint::ENTRY_POINT a_perkEntryCode, RE::Actor* a_perkOwner, void* a_argument1, void* a_argument2, void* a_argument3)
 	{
 		using func_t = decltype(&ApplyPerkEntries);
 		REL::Relocation<func_t> func{ REL::ID(23073) };
-		return func(a_perkEntryCode, a_perkOwner, a_form, a_value);
+		return func(a_perkEntryCode, a_perkOwner, a_argument1, a_argument2, a_argument3);
 	}
 
 	float GetArmorFinalRating(RE::InventoryEntryData* a_armorEntryData, float a_armorPerks, float a_skillMultiplier)

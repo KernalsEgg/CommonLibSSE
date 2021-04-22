@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RE/B/BGSEntryPoint.h"
+
 namespace RE
 {
 	class Actor;
@@ -10,7 +12,7 @@ namespace RE
 	class TESForm;
 	class InventoryEntryData;
 
-	void	 ApplyPerkEntries(std::uint8_t a_perkEntryCode, Actor* a_perkOwner, TESForm* a_item, float* a_value);
+	void	 ApplyPerkEntries(BGSEntryPoint::ENTRY_POINT a_perkEntryCode, Actor* a_perkOwner, void* a_argument1, void* a_argument2 = nullptr, void* a_argument3 = nullptr);
 	void	 CreateRefHandle(RefHandle& a_handleOut, TESObjectREFR* a_refrTo);
 	void	 DebugNotification(const char* a_notification, const char* a_soundToPlay = 0, bool a_cancelIfAlreadyQueued = true);
 	float	 GetArmorFinalRating(InventoryEntryData* a_entryData, float a_armorPerks, float a_skillMultiplier);

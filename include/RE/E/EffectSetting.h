@@ -59,6 +59,8 @@ namespace RE
 				kNoRecast = 1 << 17,
 				kPowerAffectsMagnitude = 1 << 21,
 				kPowerAffectsDuration = 1 << 22,
+				kNoCost = 1 << 24,
+				kBarrier = 1 << 25,
 				kPainless = 1 << 26,
 				kNoHitEffect = 1 << 27,
 				kNoDeathDispel = 1 << 28
